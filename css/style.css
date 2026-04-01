@@ -431,8 +431,14 @@ img { max-width: 100%; display: block; }
   animation: fadeUp 0.7s ease 1.4s forwards;
 }
 
+.scroll-pulse {
+  animation:
+    fadeUp 0.7s ease 1.4s forwards,
+    scrollPop 0.55s ease-in-out 2.2s 3;
+}
+
 .bounce {
-  animation: bounce 1.5s ease-in-out infinite;
+  animation: bounce 1.5s ease-in-out 4s infinite;
 }
 
 /* ============================================================
@@ -1384,6 +1390,13 @@ img { max-width: 100%; display: block; }
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(7px); }
+}
+
+@keyframes scrollPop {
+  0%   { transform: translateX(-50%) scale(1);    color: var(--clr-text-dim);  text-shadow: none; }
+  40%  { transform: translateX(-50%) scale(1.35); color: var(--clr-accent);    text-shadow: 0 0 18px rgba(0,212,255,0.7); }
+  70%  { transform: translateX(-50%) scale(1.18); color: var(--clr-accent);    text-shadow: 0 0 10px rgba(0,212,255,0.4); }
+  100% { transform: translateX(-50%) scale(1);    color: var(--clr-text-dim);  text-shadow: none; }
 }
 
 @keyframes ripple {
