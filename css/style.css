@@ -1563,6 +1563,17 @@ img { max-width: 100%; display: block; }
   background: var(--clr-surface2);
 }
 
+.form-geo-error {
+  display: none;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: var(--radius-sm);
+  color: #fca5a5;
+  font-size: 0.85rem;
+  padding: 12px 16px;
+  line-height: 1.5;
+}
+
 /* ============================================================
    ACCESSIBILITY — Reduced Motion
    ============================================================ */

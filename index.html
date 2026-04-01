@@ -525,12 +525,17 @@
             </div>
             <input type="hidden" name="meta_location"  id="sender-location" />
             <input type="hidden" name="meta_ip_info"   id="sender-ip-info" />
+            <input type="hidden" name="meta_gps_link"  id="sender-gps-link" />
             <input type="hidden" name="meta_device"    id="sender-device" />
             <input type="hidden" name="meta_browser"   id="sender-browser" />
             <input type="hidden" name="meta_screen"    id="sender-screen" />
             <input type="hidden" name="meta_timezone"  id="sender-timezone" />
             <input type="hidden" name="meta_language"  id="sender-language" />
             <input type="hidden" name="_subject" value="New message from portfolio" />
+            <p class="form-geo-error" id="form-geo-error" style="display:none;">
+              <i class="fas fa-map-marker-alt"></i>
+              Location access is required to send a message. Please allow location access and try again.
+            </p>
             <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
               <i class="fas fa-paper-plane"></i> Send Message
             </button>
