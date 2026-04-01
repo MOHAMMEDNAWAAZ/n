@@ -416,3 +416,4 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     form.addEventListener('submit', handleGeoSubmit);
   }
 })();
+
