@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Page Not Found | Nawaaz Mohammed</title>
+  <meta name="theme-color" content="#0a0e1a" />
+  <link rel="icon" type="image/png" href="fav-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #0a0e1a;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px 24px;
+      max-width: 560px;
+    }
+
+    .code {
+      font-family: 'Fira Code', monospace;
+      font-size: clamp(5rem, 18vw, 9rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #00d4ff, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    h1 {
+      font-size: clamp(1.3rem, 4vw, 2rem);
+      font-weight: 700;
+      color: #ffffff;
+      margin: 20px 0 12px;
+    }
+
+    p {
+      color: #94a3b8;
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #00d4ff, #7c3aed);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.25);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0, 212, 255, 0.4);
+      filter: brightness(1.1);
+    }
+
+    .divider {
+      display: inline-block;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.78rem;
+      color: #00d4ff;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: rgba(0, 212, 255, 0.08);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      canvas { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <div class="container">
+    <span class="divider">Error</span>
+    <div class="code">404</div>
+    <h1>Page Not Found</h1>
+    <p>Looks like this path doesn't exist in the infrastructure.<br />Let's get you back to base.</p>
+    <a href="/n/" class="btn">&#8592; Back to Home</a>
+  </div>
+
+  <script>
+    (function () {
+      const canvas = document.getElementById('c');
+      const ctx    = canvas.getContext('2d');
+      let W, H, particles = [];
+
+      function resize() {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+
+      function Particle() {
+        this.reset = function () {
+          this.x  = Math.random() * W;
+          this.y  = Math.random() * H;
+          this.vx = (Math.random() - 0.5) * 0.4;
+          this.vy = (Math.random() - 0.5) * 0.4;
+          this.r  = Math.random() * 1.5 + 0.5;
+          this.a  = Math.random() * 0.5 + 0.1;
+        };
+        this.reset();
+      }
+
+      function init() {
+        resize();
+        particles = Array.from({ length: 80 }, () => new Particle());
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        particles.forEach(p => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0,212,255,${p.a})`;
+          ctx.fill();
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > W || p.y < 0 || p.y > H) p.reset();
+        });
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', resize);
+      init();
+      draw();
+    })();
+  </script>
+</body>
+</html>
