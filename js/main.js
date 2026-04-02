@@ -262,19 +262,20 @@ setTimeout(typeLoop, 1600);
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const el     = entry.target;
-        const target = parseInt(el.getAttribute('data-count'), 10);
-        const dur    = 1500;
-        const start  = performance.now();
+        const el       = entry.target;
+        const raw      = el.getAttribute('data-count');
+        const suffix   = raw.replace(/[0-9]/g, ''); // e.g. "+" or ""
+        const target   = parseInt(raw, 10);
+        const dur      = 1500;
+        const start    = performance.now();
 
         function tick(now) {
           const elapsed  = now - start;
           const progress = Math.min(elapsed / dur, 1);
-          // easeOutExpo
-          const ease = 1 - Math.pow(2, -10 * progress);
-          el.textContent = Math.round(ease * target);
+          const ease     = 1 - Math.pow(2, -10 * progress);
+          el.textContent = Math.round(ease * target) + suffix;
           if (progress < 1) requestAnimationFrame(tick);
-          else el.textContent = target;
+          else el.textContent = target + suffix;
         }
         requestAnimationFrame(tick);
         observer.unobserve(el);
